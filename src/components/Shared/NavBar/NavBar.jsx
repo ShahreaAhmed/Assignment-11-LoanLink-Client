@@ -1,7 +1,7 @@
 import React from "react";
 import appLogo from "../../../assets/appLogo.png";
-import { FiMoon } from "react-icons/fi";
-import { NavLink } from "react-router";
+import { FiMoon, FiUser } from "react-icons/fi";
+import { Link, NavLink } from "react-router";
 
 const NavBar = () => {
   const links = (
@@ -17,7 +17,7 @@ const NavBar = () => {
       </li>
 
       <li className="relative group">
-        <NavLink to="" className="text-base font-medium text-gray-700 dark:text-gray-200
+        <NavLink to="/all-loans" className="text-base font-medium text-gray-700 dark:text-gray-200
           hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors
           hover:bg-transparent focus:bg-transparent">
           All-Loans
@@ -49,7 +49,7 @@ const NavBar = () => {
   );
 
   return (
-    <div className="bg-base-100 sticky top-0 z-50 shadow-sm">
+    <div className="bg-base-100 dark:bg-slate-800 sticky top-0 z-50 shadow-sm">
     <div className="navbar max-w-7xl mx-auto justify-between ">
 
       {/* LEFT SECTION */}
@@ -78,11 +78,13 @@ const NavBar = () => {
         </div>
 
         {/* Logo */}
-        <img
+        <Link to="/">
+            <img
           src={appLogo}
           className="w-36 md:w-44"
           alt="LoneLink Logo"
         />
+        </Link>
       </div>
 
       {/* RIGHT SECTION */}
@@ -101,14 +103,14 @@ const NavBar = () => {
         {/* Mode Toggle */}
         <button
           className="p-2 rounded-full text-gray-600 dark:text-gray-300
-          hover:bg-gray-100 dark:hover:bg-white transition-colors"
+          hover:bg-gray-100 dark:hover:bg-white transition-colors dark:hover:text-gray-600"
         >
           <FiMoon size={20} />
         </button>
 
         {/* Login */}
         <button
-          className="cursor-pointer px-4 py-2 text-[14px] md:text-base font-medium md:px-5 md:py-1.5 px-3 py-2 mr-2 rounded-md border-2 text-gray-700 dark:text-gray-200
+          className="cursor-pointer py-2 text-[14px] md:text-base font-medium md:px-5 md:py-1.5 px-3 mr-2 rounded-md border-2 text-gray-700 dark:text-gray-200
           hover:text-[#F5AF35] transition-colors"
         >
           Login
@@ -119,9 +121,9 @@ const NavBar = () => {
           className="cursor-pointer bg-gradient-to-r from-amber-500 to-amber-600
           text-white md:px-5 md:py-2 px-3 py-2 text-[14px] md:text-base rounded-md font-semibold shadow-lg
           shadow-amber-500/30 hover:shadow-amber-500/50
-          transform hover:-translate-y-0.5 transition-all active:scale-95"
+          transform hover:-translate-y-0.5 transition-all active:scale-95 gap-2 flex items-center"
         >
-          Register
+          <FiUser size={16} strokeWidth={2.5} /> Register
         </button>
 
       </div>
