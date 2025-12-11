@@ -108,23 +108,25 @@ const NavBar = () => {
           <FiMoon size={20} />
         </button>
 
-        {/* Login */}
-        <button
+        {/* Login button*/}
+        <Link
+        to="/login"
           className="cursor-pointer py-2 text-[14px] md:text-base font-medium md:px-5 md:py-1.5 px-3 mr-2 rounded-md border-2 text-gray-700 dark:text-gray-200
           hover:text-[#F5AF35] transition-colors"
         >
           Login
-        </button>
+        </Link>
 
-        {/* Register */}
-        <button
+        {/* Register button*/}
+        <Link
+        to="/register"
           className="cursor-pointer bg-gradient-to-r from-amber-500 to-amber-600
           text-white md:px-5 md:py-2 px-3 py-2 text-[14px] md:text-base rounded-md font-semibold shadow-lg
           shadow-amber-500/30 hover:shadow-amber-500/50
           transform hover:-translate-y-0.5 transition-all active:scale-95 gap-2 flex items-center"
         >
           <FiUser size={16} strokeWidth={2.5} /> Register
-        </button>
+        </Link>
 
       </div>
     </div>
