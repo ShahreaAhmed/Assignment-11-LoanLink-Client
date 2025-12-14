@@ -1,8 +1,35 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FiUpload } from "react-icons/fi";
+import { imageUpload } from "../../utils";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+import LoadingSpinner from "../Shared/LoadinSpinner/LoadingSpinner";
 
 const AddLoanForm = () => {
+
+  const {user} = useAuth();
+
+  // useMutation hook useCase Tanstack query
+  const {isPending, isError, mutateAsync} = useMutation({
+    mutationFn: async (payLoad) => await axios.post(`${import.meta.env.VITE_API_URL}/loans`, payLoad),
+    onSuccess: data => {
+      console.log(data)
+    },
+    onError: error => {
+      console.log(error)
+    },
+    onMutate: payLoad => {
+      console.log('I will post this data---->', payLoad)
+    },
+    onSettled: (data, error) => {
+      if (data) console.log(data)
+        if(error) console.log(error)
+    },
+  retry: 3
+  })
+
   //React hook form
   const {
     register,
@@ -10,9 +37,40 @@ const AddLoanForm = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("loan form data", data);
+
+    const { title, category, description, interest, maxLoanLimit, emiPlans, photo } =
+      data;
+    const imageFile = photo[0];
+
+
+    try{
+          const imageURL = await imageUpload(imageFile);
+
+    const loanData = {
+      image: imageURL,
+      title,
+      category,
+      description,
+      interest: Number(interest),
+      maxLoanLimit: Number(maxLoanLimit),
+      emiPlans,
+      createdBy: {
+        image: user?.photoURL,
+        name: user?.displayName,
+        email: user?.email
+      },
+    };
+
+    await mutateAsync(loanData)
+
+    }catch(err){
+      console.log(err)
+    }
   };
+
+  if (isPending) return <LoadingSpinner></LoadingSpinner>
 
   return (
     <div className="flex-1 overflow-y-auto p-4 md:p-8">
@@ -46,8 +104,8 @@ const AddLoanForm = () => {
                     placeholder="e.g. Small Business Starter"
                   />
                   {errors.title?.type === "required" && (
-                  <p className="text-red-500">Title is required.</p>
-                )}
+                    <p className="text-red-500">Title is required.</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
@@ -58,16 +116,16 @@ const AddLoanForm = () => {
                     {...register("category", { required: true })}
                     className="w-full border-gray-300 dark:border-slate-600 rounded-lg shadow-sm focus:ring-amber-500 focus:border-amber-500 p-2.5 border dark:bg-slate-700 dark:text-white"
                   >
-                    <option value="">Business</option>
-                    <option value="">Personal</option>
-                    <option value="">Education</option>
-                    <option value="">Agriculture</option>
-                    <option value="">Technology</option>
-                    <option value="">Health</option>
+                    <option value="business">Business</option>
+                    <option value="personal">Personal</option>
+                    <option value="education">Education</option>
+                    <option value="agriculture">Agriculture</option>
+                    <option value="technology">Technology</option>
+                    <option value="health">Health</option>
                   </select>
                   {errors.category?.type === "required" && (
-                  <p className="text-red-500">Category is required.</p>
-                )}
+                    <p className="text-red-500">Category is required.</p>
+                  )}
                 </div>
               </div>
               <div>
@@ -99,8 +157,10 @@ const AddLoanForm = () => {
                       placeholder="5.0"
                     />
                     {errors.interest?.type === "required" && (
-                  <p className="text-red-500">Interest percentage is required.</p>
-                )}
+                      <p className="text-red-500">
+                        Interest percentage is required.
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -113,17 +173,21 @@ const AddLoanForm = () => {
                     </div>
                     <input
                       type="number"
-                      name="maxLoanLimit"
+                      id="maxLoanLimit"
                       {...register("maxLoanLimit", { required: true, min: 0 })}
                       className="w-full border-gray-300 dark:border-slate-600 rounded-lg shadow-sm focus:ring-amber-500 focus:border-amber-500 p-2.5 border pl-8 dark:bg-slate-700 dark:text-white"
                       placeholder="10000"
                     />
                     {errors.maxLoanLimit?.type === "required" && (
-                  <p className="text-red-500">Max Loan Limit is required.</p>
-                )}
+                      <p className="text-red-500">
+                        Max Loan Limit is required.
+                      </p>
+                    )}
                     {errors.maxLoanLimit?.type === "min" && (
-                  <p className="text-red-500">Loan amount cannot be negative.</p>
-                )}
+                      <p className="text-red-500">
+                        Loan amount cannot be negative.
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -151,13 +215,12 @@ const AddLoanForm = () => {
                 </label>
 
                 <div className="flex flex-wrap gap-4">
-
-                {/* 3 months plan */}
+                  {/* 3 months plan */}
                   <label className="flex items-center space-x-2 p-3 border dark:border-slate-600 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 cursor-pointer">
                     <input
                       type="checkbox"
-                      name=""
-                      checked
+                      {...register("emiPlans")}
+                      value={3}
                       className="h-4 w-4 text-amber-500 focus:ring-amber-500 border-gray-300 rounded"
                     />
                     <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -169,8 +232,8 @@ const AddLoanForm = () => {
                   <label className="flex items-center space-x-2 p-3 border dark:border-slate-600 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 cursor-pointer">
                     <input
                       type="checkbox"
-                      name=""
-                      checked
+                      {...register("emiPlans")}
+                      value={6}
                       className="h-4 w-4 text-amber-500 focus:ring-amber-500 border-gray-300 rounded"
                     />
                     <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -182,7 +245,8 @@ const AddLoanForm = () => {
                   <label className="flex items-center space-x-2 p-3 border dark:border-slate-600 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 cursor-pointer">
                     <input
                       type="checkbox"
-                      name=""
+                      {...register("emiPlans")}
+                      value={12}
                       className="h-4 w-4 text-amber-500 focus:ring-amber-500 border-gray-300 rounded"
                     />
                     <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -194,7 +258,8 @@ const AddLoanForm = () => {
                   <label className="flex items-center space-x-2 p-3 border dark:border-slate-600 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 cursor-pointer">
                     <input
                       type="checkbox"
-                      name=""
+                      {...register("emiPlans")}
+                      value={18}
                       className="h-4 w-4 text-amber-500 focus:ring-amber-500 border-gray-300 rounded"
                     />
                     <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -206,7 +271,8 @@ const AddLoanForm = () => {
                   <label className="flex items-center space-x-2 p-3 border dark:border-slate-600 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 cursor-pointer">
                     <input
                       type="checkbox"
-                      name=""
+                      {...register("emiPlans")}
+                      value={24}
                       className="h-4 w-4 text-amber-500 focus:ring-amber-500 border-gray-300 rounded"
                     />
                     <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -218,7 +284,8 @@ const AddLoanForm = () => {
                   <label className="flex items-center space-x-2 p-3 border dark:border-slate-600 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 cursor-pointer">
                     <input
                       type="checkbox"
-                      name=""
+                      {...register("emiPlans")}
+                      value={36}
                       className="h-4 w-4 text-amber-500 focus:ring-amber-500 border-gray-300 rounded"
                     />
                     <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -228,7 +295,7 @@ const AddLoanForm = () => {
                 </div>
               </div>
 
-               {/* show home page checkbox */}
+              {/* show home page checkbox */}
               <div className="flex items-center gap-3 pt-2">
                 <div className="flex items-center h-5">
                   <input
