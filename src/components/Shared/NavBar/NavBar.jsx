@@ -1,3 +1,223 @@
+// import React from "react";
+// import appLogo from "../../../assets/appLogo.png";
+// import { FiMoon, FiUser } from "react-icons/fi";
+// import { Link, NavLink } from "react-router";
+// import useAuth from "../../../hooks/useAuth";
+
+// const NavBar = () => {
+//   const { user, logOut } = useAuth();
+
+//   const handleLogOut = () => {
+//     logOut()
+//     .then()
+//     .catch(error => {
+//       console.log(error)
+//     })
+//   }
+
+//   const links = (
+//     <>
+//       <li className="relative group">
+//         <NavLink
+//           to=""
+//           className="text-base font-medium text-gray-700 dark:text-gray-200
+//           hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors
+//           hover:bg-transparent focus:bg-transparent"
+//         >
+//           Home
+//           <span
+//             className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5AF35]
+//             transition-all duration-300 group-hover:w-full"
+//           ></span>
+//         </NavLink>
+//       </li>
+
+//       <li className="relative group">
+//         <NavLink
+//           to="/all-loans"
+//           className="text-base font-medium text-gray-700 dark:text-gray-200
+//           hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors
+//           hover:bg-transparent focus:bg-transparent"
+//         >
+//           All-Loans
+//           <span
+//             className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5AF35]
+//             transition-all duration-300 group-hover:w-full"
+//           ></span>
+//         </NavLink>
+//       </li>
+
+//       <li className="relative group">
+//         <NavLink
+//           to=""
+//           className="text-base font-medium text-gray-700 dark:text-gray-200
+//           hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors
+//           hover:bg-transparent focus:bg-transparent"
+//         >
+//           About Us
+//           <span
+//             className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5AF35]
+//             transition-all duration-300 group-hover:w-full"
+//           ></span>
+//         </NavLink>
+//       </li>
+
+//       <li className="relative group">
+//         <NavLink
+//           to=""
+//           className="text-base font-medium text-gray-700 dark:text-gray-200
+//           hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors
+//           hover:bg-transparent focus:bg-transparent"
+//         >
+//           Contact
+//           <span
+//             className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5AF35]
+//             transition-all duration-300 group-hover:w-full"
+//           ></span>
+//         </NavLink>
+//       </li>
+//     </>
+//   );
+
+//   return (
+//     <div className="bg-base-100 dark:bg-slate-800 sticky top-0 z-50 shadow-sm">
+//       <div className="navbar max-w-7xl mx-auto justify-between ">
+//         {/* LEFT SECTION */}
+//         <div className="navbar-start">
+//           {/* Mobile Dropdown */}
+//           <div className="dropdown">
+//             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+//               <svg
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 className="h-5 w-5"
+//                 fill="none"
+//                 viewBox="0 0 24 24"
+//                 stroke="currentColor"
+//               >
+//                 <path
+//                   strokeLinecap="round"
+//                   strokeLinejoin="round"
+//                   strokeWidth="2"
+//                   d="M4 6h16M4 12h8m-8 6h16"
+//                 />
+//               </svg>
+//             </div>
+
+//             <ul
+//               tabIndex={-1}
+//               className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow z-50"
+//             >
+//               {links}
+//             </ul>
+//           </div>
+
+//           {/* Logo */}
+//           <Link to="/">
+//             <img src={appLogo} className="w-36 md:w-44" alt="LoneLink Logo" />
+//           </Link>
+//         </div>
+
+//         {/* RIGHT SECTION */}
+//         <div className="navbar-end flex items-center">
+//           {/* Desktop Menu */}
+//           <div className="navbar-center hidden lg:flex">
+//             <ul className="menu menu-horizontal px-1">{links}</ul>
+//             <div className="h-6 mx-5 w-px bg-gray-300 dark:bg-gray-200 hidden lg:block"></div>
+//           </div>
+
+//           {/* Divider */}
+
+//           {/* Mode Toggle */}
+//           <button
+//             className="p-2 rounded-full text-gray-600 dark:text-gray-300
+//           hover:bg-gray-100 dark:hover:bg-white transition-colors dark:hover:text-gray-600"
+//           >
+//             <FiMoon size={20} />
+//           </button>
+
+//           {/* Login button*/}
+//           {user ? (
+//           //   <a
+//           //     onClick={handleLogOut}
+//           //     className="cursor-pointer py-2 text-[14px] md:text-base font-medium md:px-5 md:py-1.5 px-3 mr-2 rounded-md border-2 text-gray-700 dark:text-gray-200
+//           // hover:text-[#F5AF35] transition-colors"
+//           //   >
+//           //     Logout
+//           //   </a>
+
+//             <div className="dropdown dropdown-end z-50">
+//               <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+//                 <div className="w-9 border-2 border-gray-300 rounded-full">
+//                   <img
+//                     alt="User Avatar"
+//                     referrerPolicy="no-referrer"
+//                     src={
+//                       user.photoURL ||
+//                       "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+//                     }
+//                   />
+//                 </div>
+//               </div>
+//               <ul
+//                 tabIndex="-1"
+//                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
+//               >
+//                 <div className="pb-3 border-b border-b-gray-200">
+//                   <li className="text-sm font-bold">{user.displayName || "User"}</li>
+//                   <li className="text-xs">{user.email}</li>
+//                 </div>
+
+//                 {/* <li className="mt-3">
+//                   <Link href="/addProduct">Add Product</Link>
+//                 </li>
+
+//                 <li>
+//                   <Link href="/manageProduct">Manage Products</Link>
+//                 </li> */}
+
+//                 <li>
+//                   <button
+//                     onClick={handleLogOut}
+//                     className="justify-center cursor-pointer bg-gradient-to-r from-amber-500 to-amber-600
+//           text-white md:px-5 md:py-1 px-3 py-2 text-[14px] md:text-base rounded-md font-semibold shadow-lg
+//           shadow-amber-500/30 hover:shadow-amber-500/50
+//           transform hover:-translate-y-0.5 transition-all active:scale-95"
+//                   >
+//                     Logout
+//                   </button>
+//                 </li>
+//               </ul>
+//             </div>
+//           ) : (
+//             <>
+//             <Link
+//               to="/login"
+//               className="cursor-pointer py-2 text-[14px] md:text-base font-medium md:px-5 md:py-1.5 px-3 mr-2 rounded-md border-2 text-gray-700 dark:text-gray-200
+//           hover:text-[#F5AF35] transition-colors"
+//             >
+//               Login
+//             </Link>
+//             <Link
+//               to="/register"
+//               className="cursor-pointer bg-gradient-to-r from-amber-500 to-amber-600
+//           text-white md:px-5 md:py-2 px-3 py-2 text-[14px] md:text-base rounded-md font-semibold shadow-lg
+//           shadow-amber-500/30 hover:shadow-amber-500/50
+//           transform hover:-translate-y-0.5 transition-all active:scale-95 gap-2 flex items-center"
+//             >
+//               <FiUser size={16} strokeWidth={2.5} /> Register
+//             </Link>
+//             </>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default NavBar;
+
+
+
 import React from "react";
 import appLogo from "../../../assets/appLogo.png";
 import { FiMoon, FiUser } from "react-icons/fi";
@@ -9,71 +229,84 @@ const NavBar = () => {
 
   const handleLogOut = () => {
     logOut()
-    .then()
-    .catch(error => {
-      console.log(error)
-    })
-  }
+      .then()
+      .catch(error => console.log(error));
+  };
 
-  const links = (
+  // Links that everyone sees
+  const publicLinks = (
     <>
       <li className="relative group">
         <NavLink
-          to=""
-          className="text-base font-medium text-gray-700 dark:text-gray-200
-          hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors
-          hover:bg-transparent focus:bg-transparent"
+          to="/"
+          className="text-base font-medium text-gray-700 dark:text-gray-200 hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors hover:bg-transparent focus:bg-transparent"
         >
           Home
-          <span
-            className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5AF35]
-            transition-all duration-300 group-hover:w-full"
-          ></span>
+          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5AF35] transition-all duration-300 group-hover:w-full"></span>
         </NavLink>
       </li>
-
       <li className="relative group">
         <NavLink
           to="/all-loans"
-          className="text-base font-medium text-gray-700 dark:text-gray-200
-          hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors
-          hover:bg-transparent focus:bg-transparent"
+          className="text-base font-medium text-gray-700 dark:text-gray-200 hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors hover:bg-transparent focus:bg-transparent"
         >
           All-Loans
-          <span
-            className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5AF35]
-            transition-all duration-300 group-hover:w-full"
-          ></span>
+          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5AF35] transition-all duration-300 group-hover:w-full"></span>
         </NavLink>
       </li>
+    </>
+  );
 
+  // Links only visible before login
+  const guestLinks = (
+    <>
       <li className="relative group">
         <NavLink
-          to=""
-          className="text-base font-medium text-gray-700 dark:text-gray-200
-          hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors
-          hover:bg-transparent focus:bg-transparent"
+          to="/aboutUs"
+          className="text-base font-medium text-gray-700 dark:text-gray-200 hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors hover:bg-transparent focus:bg-transparent"
         >
           About Us
-          <span
-            className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5AF35]
-            transition-all duration-300 group-hover:w-full"
-          ></span>
+          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5AF35] transition-all duration-300 group-hover:w-full"></span>
         </NavLink>
       </li>
-
       <li className="relative group">
         <NavLink
-          to=""
-          className="text-base font-medium text-gray-700 dark:text-gray-200
-          hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors
-          hover:bg-transparent focus:bg-transparent"
+          to="/contact"
+          className="text-base font-medium text-gray-700 dark:text-gray-200 hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors hover:bg-transparent focus:bg-transparent"
         >
           Contact
-          <span
-            className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5AF35]
-            transition-all duration-300 group-hover:w-full"
-          ></span>
+          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5AF35] transition-all duration-300 group-hover:w-full"></span>
+        </NavLink>
+      </li>
+      <li>
+        <Link
+          to="/login"
+          className="cursor-pointer py-2 text-[14px] md:text-base font-medium md:px-5 md:py-1.5 px-3 mr-2 rounded-md border-2 text-gray-700 dark:text-gray-200 hover:text-[#F5AF35] transition-colors"
+        >
+          Login
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/register"
+          className="cursor-pointer bg-gradient-to-r from-amber-500 to-amber-600 text-white md:px-5 md:py-2 px-3 py-2 text-[14px] md:text-base rounded-md font-semibold shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 transform hover:-translate-y-0.5 transition-all active:scale-95 flex items-center gap-2"
+        >
+          <FiUser size={16} strokeWidth={2.5} /> Register
+        </Link>
+      </li>
+    </>
+  );
+
+  // Links only visible after login
+  const userLinks = (
+    <>
+      <li className="relative group">
+        <NavLink
+          to="/dashboard"
+          className="text-base font-medium text-gray-700 dark:text-gray-200 hover:text-[#F5AF35] dark:hover:text-[#edbe6d] transition-colors hover:bg-transparent focus:bg-transparent"
+        >
+          Dashboard
+          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5AF35] transition-all duration-300 group-hover:w-full"></span>
         </NavLink>
       </li>
     </>
@@ -81,39 +314,11 @@ const NavBar = () => {
 
   return (
     <div className="bg-base-100 dark:bg-slate-800 sticky top-0 z-50 shadow-sm">
-      <div className="navbar max-w-7xl mx-auto justify-between ">
+      <div className="navbar max-w-7xl mx-auto justify-between">
         {/* LEFT SECTION */}
         <div className="navbar-start">
-          {/* Mobile Dropdown */}
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </div>
-
-            <ul
-              tabIndex={-1}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow z-50"
-            >
-              {links}
-            </ul>
-          </div>
-
-          {/* Logo */}
           <Link to="/">
-            <img src={appLogo} className="w-36 md:w-44" alt="LoneLink Logo" />
+            <img src={appLogo} className="w-36 md:w-44" alt="LoanLink Logo" />
           </Link>
         </div>
 
@@ -121,40 +326,26 @@ const NavBar = () => {
         <div className="navbar-end flex items-center">
           {/* Desktop Menu */}
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">{links}</ul>
-            <div className="h-6 mx-5 w-px bg-gray-300 dark:bg-gray-200 hidden lg:block"></div>
+            <ul className="menu menu-horizontal px-1">
+              {publicLinks}
+              {user ? userLinks : guestLinks}
+            </ul>
           </div>
 
-          {/* Divider */}
-
           {/* Mode Toggle */}
-          <button
-            className="p-2 rounded-full text-gray-600 dark:text-gray-300
-          hover:bg-gray-100 dark:hover:bg-white transition-colors dark:hover:text-gray-600"
-          >
+          <button className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white transition-colors dark:hover:text-gray-600 ml-3">
             <FiMoon size={20} />
           </button>
 
-          {/* Login button*/}
+          {/* User Avatar / Login & Logout */}
           {user ? (
-          //   <a
-          //     onClick={handleLogOut}
-          //     className="cursor-pointer py-2 text-[14px] md:text-base font-medium md:px-5 md:py-1.5 px-3 mr-2 rounded-md border-2 text-gray-700 dark:text-gray-200
-          // hover:text-[#F5AF35] transition-colors"
-          //   >
-          //     Logout
-          //   </a>
-
-            <div className="dropdown dropdown-end z-50">
+            <div className="dropdown dropdown-end z-50 ml-3">
               <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                 <div className="w-9 border-2 border-gray-300 rounded-full">
                   <img
                     alt="User Avatar"
                     referrerPolicy="no-referrer"
-                    src={
-                      user.photoURL ||
-                      "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    }
+                    src={user.photoURL || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"}
                   />
                 </div>
               </div>
@@ -166,48 +357,17 @@ const NavBar = () => {
                   <li className="text-sm font-bold">{user.displayName || "User"}</li>
                   <li className="text-xs">{user.email}</li>
                 </div>
-
-                {/* <li className="mt-3">
-                  <Link href="/addProduct">Add Product</Link>
-                </li>
-
-                <li>
-                  <Link href="/manageProduct">Manage Products</Link>
-                </li> */}
-
                 <li>
                   <button
                     onClick={handleLogOut}
-                    className="justify-center cursor-pointer bg-gradient-to-r from-amber-500 to-amber-600
-          text-white md:px-5 md:py-1 px-3 py-2 text-[14px] md:text-base rounded-md font-semibold shadow-lg
-          shadow-amber-500/30 hover:shadow-amber-500/50
-          transform hover:-translate-y-0.5 transition-all active:scale-95"
+                    className="justify-center cursor-pointer bg-gradient-to-r from-amber-500 to-amber-600 text-white md:px-5 md:py-1 px-3 py-2 text-[14px] md:text-base rounded-md font-semibold shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 transform hover:-translate-y-0.5 transition-all active:scale-95"
                   >
                     Logout
                   </button>
                 </li>
               </ul>
             </div>
-          ) : (
-            <>
-            <Link
-              to="/login"
-              className="cursor-pointer py-2 text-[14px] md:text-base font-medium md:px-5 md:py-1.5 px-3 mr-2 rounded-md border-2 text-gray-700 dark:text-gray-200
-          hover:text-[#F5AF35] transition-colors"
-            >
-              Login
-            </Link>
-            <Link
-              to="/register"
-              className="cursor-pointer bg-gradient-to-r from-amber-500 to-amber-600
-          text-white md:px-5 md:py-2 px-3 py-2 text-[14px] md:text-base rounded-md font-semibold shadow-lg
-          shadow-amber-500/30 hover:shadow-amber-500/50
-          transform hover:-translate-y-0.5 transition-all active:scale-95 gap-2 flex items-center"
-            >
-              <FiUser size={16} strokeWidth={2.5} /> Register
-            </Link>
-            </>
-          )}
+          ) : null}
         </div>
       </div>
     </div>
@@ -215,6 +375,9 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+
+
 
 // import React, { useState } from 'react';
 // import { Menu, X, Sun, Moon, User, LogOut, LayoutDashboard, ChevronDown } from 'lucide-react';
