@@ -14,7 +14,7 @@ const Home = () => {
             <AvailableLoans></AvailableLoans>
             <HowItWorks></HowItWorks>
             <AddLoanForm></AddLoanForm>
-            <MyLoans></MyLoans>
+            
             <ApprovedApplication></ApprovedApplication>
             <CustomerFeedback></CustomerFeedback>
         </div>

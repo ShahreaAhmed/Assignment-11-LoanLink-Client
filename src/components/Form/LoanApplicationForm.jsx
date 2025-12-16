@@ -13,7 +13,9 @@ const LoanApplicationForm = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const {title, interest, maxLoanLimit} = location.state || {};
+  const loan = location.state || {};
+
+  const {_id, title, category, createdBy, interest, maxLoanLimit} = loan;
 
   const {user} = useAuth();
 
@@ -62,7 +64,7 @@ const LoanApplicationForm = () => {
       firstName,
         lastName,
         phone, 
-        nid, 
+        nid,
         incomeSource,
         monthlyIncome,
         loanAmount,
@@ -76,10 +78,10 @@ const LoanApplicationForm = () => {
 
       const borrowerLoanData = {
         // image: imageURL,
-        firstName,
-        lastName,
-        email: user?.email,
+        name: `${firstName} ${lastName}`,
+        borrowerEmail: user?.email,
         title,
+        category,
         interest: Number(interest),
         phone, 
         nid, 
@@ -88,14 +90,13 @@ const LoanApplicationForm = () => {
         loanAmount: Number(loanAmount),
         address,
         reason,
-        // interest: Number(interest),
         // maxLoanLimit: Number(maxLoanLimit),
         // emiPlans,
-        // createdBy: {
-        //   image: user?.photoURL,
-        //   name: user?.displayName,
-        //   email: user?.email,
-        // },
+        manager: {
+          image: createdBy?.image,
+          name: createdBy?.name,
+          email: createdBy?.email,
+        },
       };
 
       await mutateAsync(borrowerLoanData)

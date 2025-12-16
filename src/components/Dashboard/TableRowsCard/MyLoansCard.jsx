@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { BsCheckCircle, BsCreditCard, BsEye, BsXCircle } from "react-icons/bs";
 import { FaRegTimesCircle } from "react-icons/fa";
 import { FaRegCreditCard } from "react-icons/fa6";
@@ -7,11 +7,30 @@ import useAuth from "../../../hooks/useAuth";
 import axios from "axios";
 
 const MyLoansCard = ({ loan }) => {
+  const { user } = useAuth();
+//   const [searchParams] = useSearchParams();
 
-  const {user} = useAuth();
+//   const sessionId = searchParams.get('session_id')
+//   console.log(sessionId)
 
-  const { _id, title, loanAmount, category, phone, nid, address, interest, createdAt } = loan || {};
-  console.log(_id, title, loanAmount, createdAt);
+//   useEffect(() => {
+//     if(sessionId) {
+//         axios.post(`${import.meta.env.VITE_API_URL}/payment-paid`, {sessionId}
+//     );
+//     }
+//   }, [sessionId])
+
+  const {
+    _id,
+    title,
+    loanAmount,
+    category,
+    phone,
+    nid,
+    address,
+    interest,
+    createdAt,
+  } = loan || {};
 
   // const date = new Date(createdAt)
   let formattedDate = "";
@@ -38,11 +57,11 @@ const MyLoansCard = ({ loan }) => {
       },
     };
 
-    const result = await axios.post(
+    const {data} = await axios.post(
       `${import.meta.env.VITE_API_URL}/create-checkout-session`,
       paymentInfo
     );
-    console.log(result)
+    window.location.href = data.url
   };
 
   return (
@@ -88,7 +107,10 @@ const MyLoansCard = ({ loan }) => {
         <button className="text-red-600 hover:text-red-900 dark:text-red-400">
           <FaRegTimesCircle size={20} />
         </button>
-        <button onClick={handlePayment} className="flex items-center gap-1 bg-amber-500 text-white px-3 py-1 rounded hover:bg-amber-600 transition-colors shadow-sm">
+        <button
+          onClick={handlePayment}
+          className="flex items-center gap-1 bg-amber-500 text-white px-3 py-1 rounded hover:bg-amber-600 transition-colors shadow-sm"
+        >
           <FaRegCreditCard size={20} /> Pay Fee
         </button>
       </td>

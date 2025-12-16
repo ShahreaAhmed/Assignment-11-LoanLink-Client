@@ -1,18 +1,54 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { BsCheckCircle, BsCreditCard, BsEye, BsXCircle } from "react-icons/bs";
-import LoadingSpinner from "../../../components/Shared/LoadinSpinner/LoadingSpinner";
 import MyLoansCard from "../../../components/Dashboard/TableRowsCard/MyLoansCard";
 import useAuth from "../../../hooks/useAuth";
+import { useSearchParams } from "react-router";
+import LoadingSpinner from "../../../components/Shared/LoadinSpinner/LoadingSpinner";
 
 const MyLoans = () => {
   const { user } = useAuth();
+
+  
+    const [searchParams, setSearchParams] = useSearchParams();
+  
+    const sessionId = searchParams.get('session_id')
+    console.log(sessionId)
+  
+    useEffect(() => {
+      if(sessionId) {
+          axios.post(`${import.meta.env.VITE_API_URL}/payment-paid`, {sessionId}
+      );
+      }
+    }, [sessionId])
+
+//     useEffect(() => {
+//   if (!sessionId) return;
+
+//   const confirmPayment = async () => {
+//     try {
+//       await axios.post(
+//         `${import.meta.env.VITE_API_URL}/payment-paid`,
+//         { sessionId }
+//       );
+
+//       // payment successful হলে data refresh
+    
+//     } catch (error) {
+//       console.error("Payment confirmation failed:", error);
+//     }
+//   };
+
+//   confirmPayment();
+// }, [sessionId]);
+
 
   const {
     data: loans = [],
     isLoading,
     isError,
+    refetch
   } = useQuery({
     queryKey: ["my-loans"],
     queryFn: async () => {
@@ -21,7 +57,8 @@ const MyLoans = () => {
       );
       return result.data;
     },
-  });
+});
+console.log(loans)
 //   const {
 //     _id,
 //     title,

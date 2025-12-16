@@ -140,7 +140,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "my-loans",
+        path: "/dashboard/my-loans",
         element: (
           <PrivateRoute>
             <MyLoans />
