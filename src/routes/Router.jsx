@@ -156,7 +156,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "dashboard/pending-loans",
+        path: "/dashboard/pending-loans",
         element: (
           <PrivateRoute>
             <PendingApplications />

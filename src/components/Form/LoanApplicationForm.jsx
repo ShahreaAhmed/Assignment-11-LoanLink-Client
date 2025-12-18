@@ -15,7 +15,7 @@ const LoanApplicationForm = () => {
   const location = useLocation();
   const loan = location.state || {};
 
-  const {_id, title, category, createdBy, interest, maxLoanLimit} = loan;
+  const {_id, title, category, createdBy, interest, maxLoanLimit, emiPlans} = loan;
 
   const {user} = useAuth();
 
@@ -83,6 +83,7 @@ const LoanApplicationForm = () => {
         title,
         category,
         interest: Number(interest),
+        emiPlans,
         phone, 
         nid, 
         incomeSource,

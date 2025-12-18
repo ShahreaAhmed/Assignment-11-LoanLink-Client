@@ -6,6 +6,8 @@ import AvailableLoans from '../AvailableLoans/AvailableLoans';
 import AddLoanForm from '../../../components/Form/AddLoanForm';
 import ApprovedApplication from '../../Dashboard/Manager/ApprovedApplication';
 import MyLoans from '../../Dashboard/Borrower/MyLoans';
+import PendingApplications from '../../Dashboard/Manager/PendingApplications';
+import ManageLoans from '../../Dashboard/Manager/ManageLoans';
 
 const Home = () => {
     return (
@@ -14,7 +16,8 @@ const Home = () => {
             <AvailableLoans></AvailableLoans>
             <HowItWorks></HowItWorks>
             <AddLoanForm></AddLoanForm>
-            
+           
+            {/* <PendingApplications></PendingApplications> */}
             <ApprovedApplication></ApprovedApplication>
             <CustomerFeedback></CustomerFeedback>
         </div>

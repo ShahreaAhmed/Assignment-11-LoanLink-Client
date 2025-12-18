@@ -3,7 +3,7 @@ import { BsCalendar, BsCheckCircle } from "react-icons/bs";
 
 const ApprovedApplication = () => {
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
           Approved Applications

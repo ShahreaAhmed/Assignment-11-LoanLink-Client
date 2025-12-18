@@ -48,12 +48,11 @@ const MyLoans = () => {
     data: loans = [],
     isLoading,
     isError,
-    refetch
   } = useQuery({
-    queryKey: ["my-loans"],
+    queryKey: ["my-loans", user?.email],
     queryFn: async () => {
       const result = await axios(
-        `${import.meta.env.VITE_API_URL}/my-loans/${user.email}`
+        `${import.meta.env.VITE_API_URL}/my-loans/${user?.email}`
       );
       return result.data;
     },
