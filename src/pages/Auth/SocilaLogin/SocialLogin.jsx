@@ -1,19 +1,39 @@
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import useAuth from '../../../hooks/useAuth';
+import toast from 'react-hot-toast';
+import { useLocation, useNavigate } from 'react-router';
+import { saveOrUpdateUser } from '../../../utils';
 
 const SocialLogin = () => {
 
-    const {signInGoogle} = useAuth();
+      const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state || '/'
 
-    const handleGoogleSignIn = () => {
-        signInGoogle()
-        .then(result => {
-            console.log(result.user)
-        })
-        .catch(error => {
+    
+    const {signInGoogle} = useAuth();
+    const handleGoogleSignIn =  async () => {
+        try{
+            const {user} = await signInGoogle()
+
+            await saveOrUpdateUser({name: user?.displayName, email: user?.email, image:  user.photoURL})
+
+            navigate(from, { replace: true })
+            toast.success('Signup Successful')
+
+        } catch (error){
             console.log(error)
-        })
+            toast.error(error?.message)
+
+        }
+
+        // .then(result => {
+        //     console.log(result.user)
+        // })
+        // .catch(error => {
+        //     console.log(error)
+        // })
     }
 
     return (

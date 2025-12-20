@@ -1,9 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import SocialLogin from "../SocilaLogin/SocialLogin";
-import { imageUpload } from "../../../utils";
+import { imageUpload, saveOrUpdateUser } from "../../../utils";
+import toast from "react-hot-toast";
+import LoadingSpinner from "../../../components/Shared/LoadinSpinner/LoadingSpinner";
 
 const Register = () => {
 
@@ -11,11 +13,17 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    isPending,
     formState: { errors },
   } = useForm();
   const { registerUser, updateUserProfile } = useAuth();
 
+   const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state || '/'
+
   const handleRegistration = async(data) => {
+    const {name, email, image, password, role} = data
     console.log("after register", data.photo[0]);
     const profileImg = data.photo[0];
 
@@ -58,26 +66,37 @@ const Register = () => {
 
 
     try{
-      // register user
-      const result = await registerUser(data.email, data.password);
-      console.log(result.user);
-
+      
       // upload image using reusable function
       const imageURL = await imageUpload(profileImg);
       console.log("Upload image url", imageURL);
 
+      // register user
+      const result = await registerUser(email, password);
+      console.log(result.user);
+
+      await saveOrUpdateUser({name, email, image: imageURL, role: role})
+
+
       // update profile 
       const userProfile = {
-            displayName: data.name,
+            displayName: name,
             photoURL: imageURL,
           };
 
           await updateUserProfile(userProfile);
           console.log('user profile update')
+
+          navigate(from, { replace: true })
+      toast.success('Signup Successful')
+
     }catch(error) {
       console.log(error);
+      toast.error(error?.message)
     }
   };
+
+  if (isPending) return <LoadingSpinner></LoadingSpinner>
 
   return (
     <div className="flex-grow">
@@ -152,8 +171,7 @@ const Register = () => {
                     Role
                 </label>
                 <select               
-                {...register("role", { required: true })}
-                 name="" 
+                {...register("role", { required: true })} 
                  className="block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
                     <option value="borrower">Borrower</option>
                     <option value="manager">Loan Officer (Manager)</option>

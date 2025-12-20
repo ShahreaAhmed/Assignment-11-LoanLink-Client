@@ -130,31 +130,55 @@
 
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import { FcGoogle } from "react-icons/fc";
 import authImage from "../../../assets/authImage.png";
 import SocialLogin from "../SocilaLogin/SocialLogin";
+import toast from "react-hot-toast";
+import { saveOrUpdateUser } from "../../../utils";
 
 const Login = () => {
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const { signInUser } = useAuth();
+  const { signInUser, user } = useAuth();
 
-  const handleLogin = (data) => {
-    console.log("form data", data);
-    signInUser(data.email, data.password)
-      .then((result) => {
-        console.log(result.user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+   const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state || '/'
+
+  const handleLogin = async (data) => {
+    
+
+    try {
+    const {user} = await  signInUser(data.email, data.password)
+
+    await saveOrUpdateUser({name:user?.displayName, email:user?.email, image: user?.photoURL})
+
+    navigate (from, {replace: true})
+    toast.success('Login Successful')
+
+    } catch (error) {
+       console.log(error)
+       toast.error(error?.message)
+    }
+  }
+
+  // const handleLogin = (data) => {
+  //   console.log("form data", data);
+  //   signInUser(data.email, data.password)
+  //     .then((result) => {
+  //       console.log(result.user);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   return (
     <div className="flex-grow">
