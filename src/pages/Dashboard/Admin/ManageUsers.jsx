@@ -10,8 +10,6 @@ const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  //   const [selectedUser, setSelectedUser] = useState(null);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data: manageUsers = [], isLoading, refetch } = useQuery({
     queryKey: ["manage-users", user?.email],
