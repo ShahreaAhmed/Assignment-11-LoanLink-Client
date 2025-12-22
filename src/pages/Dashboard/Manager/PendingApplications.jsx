@@ -6,7 +6,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../components/Shared/LoadinSpinner/LoadingSpinner";
 import PendingApplicationCard from "../../../components/Dashboard/TableRowsCard/PendingApplicationCard";
-import PendingApplicationDetailsModal from "../../../components/PendingApplicationviewDetails/PendingApplicationDetailsModal";
+import PendingApplicationDetailsModal from "../../../components/Modal/PendingApplicationDetailsModal";
 
 const PendingApplications = () => {
   const { user } = useAuth();
@@ -16,7 +16,6 @@ const PendingApplications = () => {
   const {
     data: pendingApplications = [],
     isLoading,
-    isError,
   } = useQuery({
     queryKey: ["pending-loans", user?.email],
     queryFn: async () => {

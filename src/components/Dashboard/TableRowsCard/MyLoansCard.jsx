@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 // import { BsCheckCircle, BsCreditCard, BsEye, BsXCircle } from "react-icons/bs";
 import { FaRegTimesCircle } from "react-icons/fa";
 import { FaRegCreditCard } from "react-icons/fa6";

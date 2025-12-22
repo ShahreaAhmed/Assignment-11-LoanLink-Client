@@ -1,9 +1,8 @@
-import React, { useState } from "react";
 import { BsCalendar, BsCheckCircle, BsEye, BsXCircle } from "react-icons/bs";
 import { FaDollarSign } from "react-icons/fa6";
 
 const PendingApplicationCard = ({ pendingData, setSelectedApp }) => {
-  const { _id, name, borrowerEmail, title, loanAmount, createdAt, phone, address, reason, monthlyIncome, nid } =
+  const { _id, name, borrowerEmail, title, loanAmount, createdAt} =
     pendingData;
     console.log(pendingData)
 

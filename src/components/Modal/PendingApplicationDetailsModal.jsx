@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { BsBriefcase, BsCheckCircle, BsCheckCircleFill, BsX, BsXCircle } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import { FaDollarSign, FaMapPin } from "react-icons/fa6";
