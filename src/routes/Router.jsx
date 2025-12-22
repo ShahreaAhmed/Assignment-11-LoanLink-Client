@@ -17,10 +17,12 @@ import LoanApplications from "../pages/Dashboard/Admin/LoanApplications";
 import PrivateRoute from "./PrivateRoute";
 import PendingApplications from "../pages/Dashboard/Manager/PendingApplications";
 import ApprovedApplication from "../pages/Dashboard/Manager/ApprovedApplication";
-import Statistics from "../components/Dashboard/Statistics/Statistics";
+// import Statistics from "../components/Dashboard/Statistics/AdminStatistics";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import Contract from "../pages/Contact/Contact";
 import LoanApplicationForm from "../components/Form/LoanApplicationForm";
+import AddLoanForm from "../components/Form/AddLoanForm";
+import Statistics from "../pages/Dashboard/Common/Statistics";
 
 export const router = createBrowserRouter([
   {
@@ -95,7 +97,7 @@ export const router = createBrowserRouter([
         path: "add-loan",
         element: (
           <PrivateRoute>
-            <AddLoan />
+            <AddLoanForm />
           </PrivateRoute>
         ),
       },
@@ -108,7 +110,8 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "dashboard/manage-users",
+        // path: "dashboard/manage-users",
+        path: "manage-users",
         element: (
           <PrivateRoute>
             <ManageUsers />
@@ -116,7 +119,8 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "dashboard/all-loan",
+        // path: "dashboard/all-loan",
+        path: "all-loan",
         element: (
           <PrivateRoute>
             <AllLoans />
@@ -124,7 +128,8 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "dashboard/loan-applications",
+        // path: "dashboard/loan-applications",
+        path: "loan-applications",
         element: (
           <PrivateRoute>
             <LoanApplications />
@@ -148,7 +153,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "dashboard/approved-loans",
+        path: "/dashboard/approved-loans",
         element: (
           <PrivateRoute>
             <ApprovedApplication />

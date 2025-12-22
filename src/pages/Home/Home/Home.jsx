@@ -15,10 +15,6 @@ const Home = () => {
             <Banner></Banner>
             <AvailableLoans></AvailableLoans>
             <HowItWorks></HowItWorks>
-            <AddLoanForm></AddLoanForm>
-           
-            {/* <PendingApplications></PendingApplications> */}
-            <ApprovedApplication></ApprovedApplication>
             <CustomerFeedback></CustomerFeedback>
         </div>
     );

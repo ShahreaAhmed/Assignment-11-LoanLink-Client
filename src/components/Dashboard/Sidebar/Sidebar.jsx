@@ -11,6 +11,9 @@ import MenuItem from './Menu/MenuItem'
 import AdminMenu from './Menu/AdminMenu'
 import ManagerMenu from './Menu/ManagerMenu'
 import BorrowerMenu from './Menu/BorrowerMenu'
+import { LuUser } from 'react-icons/lu'
+import useRole from '../../../hooks/useRole'
+import LoadingSpinner from '../../Shared/LoadinSpinner/LoadingSpinner'
 
 // User Menu
 // import MenuItem from './Menu/MenuItem'
@@ -21,11 +24,14 @@ import BorrowerMenu from './Menu/BorrowerMenu'
 const Sidebar = () => {
   const { logOut } = useAuth()
   const [isActive, setActive] = useState(false)
+  const [role, isRoleLoading] = useRole()
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive)
   }
+
+  if (isRoleLoading) return <LoadingSpinner></LoadingSpinner>
 
   return (
     <div>
@@ -49,17 +55,20 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        // className={` z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        //   isActive && '-translate-x-full'
+        // }  md:translate-x-0 transition duration-200 ease-in-out`}
+        className={` h-full min-h-[calc(100vh-80px)] flex flex-col bg-slate-900 overflow-x-hidden absolute inset-y-0 text-white w-64 shadow-2xl dark:border-r dark:border-slate-800 ${
           isActive && '-translate-x-full'
-        }  md:translate-x-0  transition duration-200 ease-in-out`}
+        }  md:translate-x-0 transition duration-200 ease-in-out`}
       >
         <div className='flex flex-col h-full'>
           {/* Top Content */}
           <div>
             {/* Logo */}
-            <div className='w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-lime-100 mx-auto'>
+            <div className='w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center  mx-auto'>
               <Link to='/'>
-                <img src={logo} alt='logo' width='100' height='100' />
+                <img src={logo} alt='logo' width='180' height='100' />
               </Link>
             </div>
           </div>
@@ -75,9 +84,9 @@ const Sidebar = () => {
                 address='/dashboard'
               />
               {/* Role-Based Menu */}
-              <AdminMenu />
-              <ManagerMenu />
-              <BorrowerMenu />
+              {role === 'borrower' && <BorrowerMenu />}
+              {role === 'manager' && <ManagerMenu />}
+              {role === 'admin' && <AdminMenu />}
             </nav>
           </div>
 
@@ -86,18 +95,24 @@ const Sidebar = () => {
             <hr />
 
             <MenuItem
-              icon={FcSettings}
+              icon={LuUser}
               label='Profile'
               address='/dashboard/profile'
             />
-            <button
+            <div className='p-4 border-t border-slate-800'>
+               <button
               onClick={logOut}
-              className='flex cursor-pointer w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'
+              // className='flex cursor-pointer w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'
+              className='flex items-center gap-3 px-4 py-3 w-full rounded-lg text-red-400 hover:bg-slate-800 hover:text-red-300 transition-colors'
             >
               <GrLogout className='w-5 h-5' />
 
+              {/* <span className='flex cursor-pointer w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'>Logout</span> */}
               <span className='mx-4 font-medium'>Logout</span>
             </button>
+            </div>
+
+
           </div>
         </div>
       </div>

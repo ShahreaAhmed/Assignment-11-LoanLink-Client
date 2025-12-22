@@ -7,18 +7,26 @@ const DashboardLayout = () => {
   return (
     <div className='relative min-h-screen  bg-white'>
       {/* Left Side: Sidebar Component */}
-      <NavBar></NavBar>
       <Sidebar />
       {/* Right Side: Dashboard Dynamic Content */}
-      <div className='flex-1  md:ml-64'>
-        <div className='p-5'>
+      <div className='flex-1 p-5 md:ml-64'>
           {/* Outlet for dynamic contents */}
           <Outlet />
-        </div>
       </div>
-      <Footer></Footer>
+
     </div>
   )
 }
 
 export default DashboardLayout
+
+
+
+
+
+
+
+
+
+
+

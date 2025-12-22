@@ -6,7 +6,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../components/Shared/LoadinSpinner/LoadingSpinner";
 import PendingApplicationCard from "../../../components/Dashboard/TableRowsCard/PendingApplicationCard";
-import PendingApplicationDetailsModal from "../../../components/PendingApplicationDetailsModal/PendingApplicationDetailsModal";
+import PendingApplicationDetailsModal from "../../../components/PendingApplicationviewDetails/PendingApplicationDetailsModal";
 
 const PendingApplications = () => {
   const { user } = useAuth();

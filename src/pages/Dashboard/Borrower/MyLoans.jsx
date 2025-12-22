@@ -4,11 +4,13 @@ import axios from "axios";
 import { BsCheckCircle, BsCreditCard, BsEye, BsXCircle } from "react-icons/bs";
 import MyLoansCard from "../../../components/Dashboard/TableRowsCard/MyLoansCard";
 import useAuth from "../../../hooks/useAuth";
-import { useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import LoadingSpinner from "../../../components/Shared/LoadinSpinner/LoadingSpinner";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const MyLoans = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure()
 
   
     const [searchParams, setSearchParams] = useSearchParams();
@@ -23,26 +25,6 @@ const MyLoans = () => {
       }
     }, [sessionId])
 
-//     useEffect(() => {
-//   if (!sessionId) return;
-
-//   const confirmPayment = async () => {
-//     try {
-//       await axios.post(
-//         `${import.meta.env.VITE_API_URL}/payment-paid`,
-//         { sessionId }
-//       );
-
-//       // payment successful হলে data refresh
-    
-//     } catch (error) {
-//       console.error("Payment confirmation failed:", error);
-//     }
-//   };
-
-//   confirmPayment();
-// }, [sessionId]);
-
 
   const {
     data: loans = [],
@@ -51,8 +33,8 @@ const MyLoans = () => {
   } = useQuery({
     queryKey: ["my-loans", user?.email],
     queryFn: async () => {
-      const result = await axios(
-        `${import.meta.env.VITE_API_URL}/my-loans/${user?.email}`
+      const result = await axiosSecure(
+        `/my-loans`
       );
       return result.data;
     },
@@ -142,12 +124,12 @@ console.log(loans)
                     className="px-6 py-12 text-center text-slate-500"
                   >
                     No loan applications found.{" "}
-                    <a
-                      href="#/all-loans"
+                    <Link
+                      to="/all-loans"
                       className="text-amber-600 hover:underline"
                     >
                       Apply now
-                    </a>
+                    </Link>
                     .
                   </td>
                 </tr>
