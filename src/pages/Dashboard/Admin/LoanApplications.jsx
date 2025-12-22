@@ -3,6 +3,7 @@ import React from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import AllApplicationCard from '../../../components/Dashboard/TableRowsCard/AllApplicationCard';
+import LoadingSpinner from '../../../components/Shared/LoadinSpinner/LoadingSpinner';
 
 const LoanApplications = () => {
     const {user} = useAuth()
@@ -20,6 +21,8 @@ const LoanApplications = () => {
         },
     });
     console.log(allApply)
+
+    if(isLoading) <LoadingSpinner></LoadingSpinner>
 
     return (
         <div>

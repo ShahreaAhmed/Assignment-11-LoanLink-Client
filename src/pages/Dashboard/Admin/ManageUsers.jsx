@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BsChevronLeft, BsChevronRight, BsSearch } from "react-icons/bs";
 import ManageUsersCard from "../../../components/Dashboard/TableRowsCard/ManageUsersCard";
 import { useQuery } from "@tanstack/react-query";
