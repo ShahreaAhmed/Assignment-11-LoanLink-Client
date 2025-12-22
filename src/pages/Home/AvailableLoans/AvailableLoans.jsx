@@ -8,7 +8,7 @@ import HomeLoanCard from '../HomeLoanCard/HomeLoanCard';
 
 const AvailableLoans = () => {
    
-    const {data: loans= [], isLoading, isError} = useQuery({
+    const {data: loans= [], isLoading} = useQuery({
         queryKey: ['loans'],
         queryFn: async () => {
             const result = await axios(`${import.meta.env.VITE_API_URL}/loans`)

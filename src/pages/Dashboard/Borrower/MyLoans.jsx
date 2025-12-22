@@ -13,7 +13,7 @@ const MyLoans = () => {
   const axiosSecure = useAxiosSecure()
 
   
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
   
     const sessionId = searchParams.get('session_id')
     console.log(sessionId)
@@ -28,8 +28,7 @@ const MyLoans = () => {
 
   const {
     data: loans = [],
-    isLoading,
-    isError,
+    isLoading
   } = useQuery({
     queryKey: ["my-loans", user?.email],
     queryFn: async () => {
@@ -39,43 +38,6 @@ const MyLoans = () => {
       return result.data;
     },
 });
-console.log(loans)
-//   const {
-//     _id,
-//     title,
-//     category,
-//     loanAmount,
-//     phone,
-//     nid,
-//     address,
-//     interest,
-//     createdAt,
-//   } = loans;
-
-//   const handlePayment = async () => {
-//     const paymentInfo = {
-//       loanId: _id,
-//       title,
-//       category,
-//       loanAmount,
-//       phone,
-//       nid,
-//       address,
-//       interest,
-//       createdAt,
-//       borrower: {
-//         name: user?.displayName,
-//         email: user?.email,
-//         image: user?.photoURL,
-//       },
-//     };
-
-//     const result = await axios(
-//       `${import.meta.env.VITE_API_URL}/create-checkout-session`,
-//       paymentInfo
-//     );
-//     console.log(result)
-//   };
 
   if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 

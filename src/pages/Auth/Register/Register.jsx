@@ -23,47 +23,9 @@ const Register = () => {
   const from = location.state || '/'
 
   const handleRegistration = async(data) => {
-    const {name, email, image, password, role} = data
+    const {name, email, password, role} = data
     console.log("after register", data.photo[0]);
     const profileImg = data.photo[0];
-
-    // registerUser(data.email, data.password)
-    //   .then((result) => {
-    //     console.log(result.user);
-
-    //     // 1. store the image in form data
-    //     const formData = new FormData();
-    //     formData.append('image', profileImg);
-
-    //     // 2. send the photo to store and get the url
-    //     const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imageBB_host_key}`
-
-    //     axios.post(image_API_URL, formData)
-    //     .then( res => {
-    //       console.log('after image upload', res.data.data.url)
-
-    //       // update user profile to firebase 
-    //       const userProfile = {
-    //         displayName: data.name,
-    //         photoURL: res.data.data.url,
-    //       }
-
-    //       updateUserProfile(userProfile)
-    //       .then(() => {
-    //         console.log('user profile updated done')
-    //       })
-    //       .catch(error => {
-    //         console.log(error)
-    //       })
-    //     })
-
-    //     // update user profile
-
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
 
     try{
       
