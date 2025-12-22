@@ -8,7 +8,7 @@ import CreatedAllLoanCard from '../../../components/Dashboard/TableRowsCard/Crea
 
 const AllLoans = () => {
 
-    const {data: allLoan= [], isLoading, isError} = useQuery({
+    const {data: allLoan= [], isLoading} = useQuery({
         queryKey: ['loans'],
         queryFn: async () => {
             const result = await axios(`${import.meta.env.VITE_API_URL}/loans`)

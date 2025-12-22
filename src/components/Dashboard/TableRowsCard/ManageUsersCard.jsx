@@ -58,7 +58,9 @@ const ManageUsersCard = ({user, refetch}) => {
               {/* ))} */}
               {user.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="px-6 py-12 text-center text-slate-500">No users found matching "{searchTerm}"</td>
+                  <td colSpan={5} className="px-6 py-12 text-center text-slate-500">No users found matching "
+                    {/* {searchTerm} */}
+                    "</td>
                 </tr>
               )}
             </>
