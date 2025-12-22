@@ -8,6 +8,7 @@ import ApprovedApplication from '../../Dashboard/Manager/ApprovedApplication';
 import MyLoans from '../../Dashboard/Borrower/MyLoans';
 import PendingApplications from '../../Dashboard/Manager/PendingApplications';
 import ManageLoans from '../../Dashboard/Manager/ManageLoans';
+import WhyChooseLoanLink from '../WhyChooseLoanLink/WhyChooseLoanLink';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <Banner></Banner>
             <AvailableLoans></AvailableLoans>
             <HowItWorks></HowItWorks>
+            <WhyChooseLoanLink></WhyChooseLoanLink>
             <CustomerFeedback></CustomerFeedback>
         </div>
     );

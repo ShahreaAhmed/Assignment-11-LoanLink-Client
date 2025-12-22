@@ -19,7 +19,7 @@ const AvailableLoans = () => {
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
-       <div>
+       <div className='mt-20'>
         {loans && loans.length > 0 ? (
          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
          {loans.map(loan => <HomeLoanCard key={loan._id} loan={loan}></HomeLoanCard>)}
