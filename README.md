@@ -1,16 +1,126 @@
-# React + Vite
+*** LoanLink – Microloan Request & Approval Tracker System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Project Overview
+LoanLink is a full-stack, web-based microloan request and approval management system designed for small financial organizations, NGOs, and microloan providers.  
+The platform enables borrowers to apply for loans, managers to review and approve applications, and admins to manage users, loans, and overall system activities through role-based dashboards.
 
-Currently, two official plugins are available:
+## 🎯 Purpose of the Project
+The main goal of LoanLink is to streamline the complete loan lifecycle—from loan creation and application to approval and tracking—within a single, secure, and user-friendly platform.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live Website
+🔗 Live URL: https://frabjous-squirrel-eb1932.netlify.app   
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 👥 User Roles & Features
 
-## Expanding the ESLint configuration
+### 🔹 Borrower
+- Register and login securely
+- View available loans
+- Apply for loans
+- Track loan status (Pending / Approved / Rejected)
+- Cancel pending loan applications
+- View profile information
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🔹 Manager (Loan Officer)
+- Add new loan products
+- Manage own loans
+- View pending loan applications
+- Approve or reject loan requests
+- View approved loans
+- Manage profile
+
+### 🔹 Admin
+- Manage users and roles (Borrower / Manager / Admin)
+- Suspend or approve users
+- Manage all loans
+- Control which loans appear on the home page
+- View and filter all loan applications
+
+
+
+## 🏠 Home Page Features
+- Eye-catching hero section with call-to-action
+- Available loans section (data from MongoDB)
+- How it works (step-by-step process)
+- Customer feedback carousel
+- Additional relevant sections
+- Smooth animations using Framer Motion
+
+
+
+## 🔐 Authentication & Security
+- Email & password-based authentication
+- Google or GitHub social login
+- Firebase authentication
+- Protected private routes (role-based)
+- Firebase config secured using environment variables
+- MongoDB credentials secured using environment variables
+
+
+
+## 📊 Dashboard Highlights
+- Role-based dashboard layouts
+- Fully responsive design
+- Clean and consistent UI
+- Data tables with filtering and searching
+- Toast/SweetAlert notifications for all actions
+- Loading spinners during API calls
+- Charts and visual indicators for better insights
+
+
+
+## 🛠️ Technologies Used
+
+### Frontend
+- React
+- React Router
+- Tailwind CSS
+- Firebase Authentication
+- Framer Motion
+- Axios
+- React Hook Form
+- SweetAlert
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- JWT Authentication
+- CORS
+- Dotenv
+
+
+
+## 📦 NPM Packages Used
+- express
+- cors
+- mongodb
+- dotenv
+- jsonwebtoken
+- axios
+- firebase
+- react-router-dom
+- react-hook-form
+- framer-motion
+- react-hot-toast
+
+
+
+## 🚀 Deployment
+- Client deployed on Vercel
+- Server deployed on Vercel
+
+
+
+## ✅ Additional Features
+- Dark/Light theme toggle
+- Dynamic page titles
+- 404 Not Found page
+- Fully responsive for mobile, tablet, and desktop
+- Proper alignment, spacing, and clean UI design
+
+
+
+## 👨‍💻 Author
+Shahrea Ahmed  
+Frontend & MERN Stack Developer
